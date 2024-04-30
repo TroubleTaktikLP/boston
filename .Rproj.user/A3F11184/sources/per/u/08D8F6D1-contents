@@ -1,4 +1,0 @@
-library("MASS")
-View(Boston)
-?Boston
-
