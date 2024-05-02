@@ -13,8 +13,8 @@ barplot(Boston$nox, main = "Stickstoffoxidkonzentration", ylab = "Parts per 10 M
 boxplot(Boston$nox, main = "Verteilung der Stickstoffoxidkonzentration", ylab = "Parts per 10 Million")
 
 #dis
-barplot(Boston$dis, main = "gewichteter Mittelwert der Enfernung zu fünf Arbeitszentren", ylab = "Meilen")
-boxplot(Boston$dis, main = "gewichteter Mittelwert der Enfernung zu fünf Arbeitszentren", ylab = "Meilen")
+barplot(Boston$dis, ylab = "Entfernung in Meilen")
+boxplot(Boston$dis, ylab = "Entfernung in Meilen")
 
 #ptratio
 barplot(Boston$ptratio, main = "Schüler-Lehrer-Verhältnis", ylab = "Schüler pro Lehrkraft")
@@ -36,3 +36,27 @@ medv_chas_1 <- Boston$medv[Boston$chas == 1]
 
 # Boxplot
 boxplot(medv_chas_0, medv_chas_1, names = c("nicht am Fluss", "am Fluss"), col = c("skyblue", "lightgreen"), main = "Grundstückskonzentration nach Lage am Fluss")
+
+
+#für black-lstatus
+plot(Boston$black, Boston$lstat, col = "blue", pch = 16, ylab = "prozentualer Anteil eines niedrigen Status", xlab = "Anteil der Schwarzen pro Stadt")
+abline(lm(lstat ~ black, data = Boston), col = "red")
+coef(lm(lstat ~ black, data= Boston))
+
+
+#für zn-tax
+#muss noch überarbeitet werden
+plot(Boston$tax, Boston$zn, col = "blue", pch = 16, ylab = "Anteil der Wohngrundstücke über 25k sq.ft. in %", xlab = "Grundsteuersatz")
+abline(lm(tax ~ zn, data = Boston), col = "red")
+coef(lm(tax ~ zn, data= Boston))
+
+#für rm-medv
+#muss noch überarbeitet werden
+plot(Boston$rm, Boston$medv, col = "blue", pch = 16, ylab = "Durchschnittswert von Eigenheimen", xlab = "Räume pro Wohnung")
+abline(lm(rm ~ medv, data = Boston), col = "red")
+coef(lm(rm ~ medv, data= Boston))
+
+
+
+
+
