@@ -2,27 +2,30 @@ plot(Boston$black, Boston$crim,      xlab = "Anteil an schwarzen Einwohnern", yl
 abline(lm(crim ~ black, data = Boston), col = "red")
 coef(lm(crim ~ black, data= Boston))
 
+boxplot(Boston$tax, xlab = "Steuersatz", ylab = "Wert")
+
+
 #meins
 
 
 #zn
-barplot(Boston$zn, main = "Anteil der Wohnungsgrundstück über 25.000 sq.ft.", ylab = "%")
+barplot(Boston$zn, ylab = "Anteil in %")
 
 #nox
-barplot(Boston$nox, main = "Stickstoffoxidkonzentration", ylab = "Parts per 10 Million")
-boxplot(Boston$nox, main = "Verteilung der Stickstoffoxidkonzentration", ylab = "Parts per 10 Million")
+barplot(Boston$nox, ylab = "Teile pro 10 Million")
+boxplot(Boston$nox, ylab = "Teile pro 10 Million")
 
 #dis
 barplot(Boston$dis, ylab = "Entfernung in Meilen")
 boxplot(Boston$dis, ylab = "Entfernung in Meilen")
 
 #ptratio
-barplot(Boston$ptratio, main = "Schüler-Lehrer-Verhältnis", ylab = "Schüler pro Lehrkraft")
-boxplot(Boston$ptratio, main = "Schüler-Lehrer-Verhältnis", ylab = "Schüler pro Lehrkraft")
+barplot(Boston$ptratio, ylab = "Schüler pro Lehrkraft")
+boxplot(Boston$ptratio, ylab = "Schüler pro Lehrkraft")
 
 #medv
-boxplot(Boston$medv, main = "Durchschnittswert von Eigenheimen", ylab = "in 1000 US-$")
-barplot(Boston$medv, main = "Durschnittswert von Eigenheimen", ylab = "in 1000 US-$")
+boxplot(Boston$medv, ylab = "in 1000 US-$")
+barplot(Boston$medv, ylab = "in 1000 US-$")
 
 
 # KORRELATIONEN
@@ -35,28 +38,36 @@ medv_chas_0 <- Boston$medv[Boston$chas == 0]
 medv_chas_1 <- Boston$medv[Boston$chas == 1]
 
 # Boxplot
-boxplot(medv_chas_0, medv_chas_1, names = c("nicht am Fluss", "am Fluss"), col = c("skyblue", "lightgreen"), main = "Grundstückskonzentration nach Lage am Fluss")
+boxplot(medv_chas_0, medv_chas_1, names = c("nicht am Fluss", "am Fluss"), col = c("skyblue", "lightgreen"), ylab= "Durchschnittswert von Eigenheimen in 1000 US-$")
 
 
 #für black-lstatus
 plot(Boston$black, Boston$lstat, col = "blue", pch = 16, ylab = "prozentualer Anteil eines niedrigen Status", xlab = "Anteil der Schwarzen pro Stadt")
 abline(lm(lstat ~ black, data = Boston), col = "red")
 coef(lm(lstat ~ black, data= Boston))
+cor(Boston$black, Boston$lstat)
 
 
 #für zn-tax
 #muss noch überarbeitet werden
 plot(Boston$tax, Boston$zn, col = "blue", pch = 16, ylab = "Anteil der Wohngrundstücke über 25k sq.ft. in %", xlab = "Grundsteuersatz")
-abline(lm(tax ~ zn, data = Boston), col = "red")
-coef(lm(tax ~ zn, data= Boston))
+abline(lm(zn ~ tax, data = Boston), col = "red")
+coef(lm(zn ~ tax, data= Boston))
+cor(Boston$tax, Boston$zn)
+
 
 #für rm-medv
 #muss noch überarbeitet werden
 plot(Boston$rm, Boston$medv, col = "blue", pch = 16, ylab = "Durchschnittswert von Eigenheimen", xlab = "Räume pro Wohnung")
-abline(lm(rm ~ medv, data = Boston), col = "red")
-coef(lm(rm ~ medv, data= Boston))
+abline(lm(medv ~ rm, data = Boston), col = "red")
+coef(lm(medv ~ rm, data= Boston))
+cor(Boston$rm, Boston$medv)
 
 
-
-
+#für zn-medv
+#muss noch überarbeitet werden
+plot(Boston$medv, Boston$zn, col = "blue", pch = 16, ylab = "Anzahl der Grundstücke über 25.000 sq.ft.", xlab = "Durchschnittswert von Eigenheimen")
+abline(lm(zn ~ medv, data = Boston), col = "red")
+coef(lm(zn ~ medv, data= Boston))
+cor(Boston$medv, Boston$zn)
 
