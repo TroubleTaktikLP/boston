@@ -10,10 +10,11 @@ boxplot(Boston$tax, xlab = "Steuersatz", ylab = "Wert")
 
 #zn
 barplot(Boston$zn, ylab = "Anteil in %")
+boxplot(Boston$zn)
 
 #nox
-barplot(Boston$nox, ylab = "Teile pro 10 Million")
-boxplot(Boston$nox, ylab = "Teile pro 10 Million")
+barplot(Boston$nox, ylab = "Teile pro 10 Million", ylim = c(0,1))
+boxplot(Boston$nox, ylab = "Teile pro 10 Million", ylim = c(0.3,0.9))
 
 #dis
 barplot(Boston$dis, ylab = "Entfernung in Meilen")
@@ -31,14 +32,10 @@ barplot(Boston$medv, ylab = "in 1000 US-$")
 # KORRELATIONEN
 
 # für medv-chas
-# Subsetting der Daten für chas = 0
 medv_chas_0 <- Boston$medv[Boston$chas == 0]
-
-# Subsetting der Daten für chas = 1
 medv_chas_1 <- Boston$medv[Boston$chas == 1]
-
-# Boxplot
 boxplot(medv_chas_0, medv_chas_1, names = c("nicht am Fluss", "am Fluss"), col = c("skyblue", "lightgreen"), ylab= "Durchschnittswert von Eigenheimen in 1000 US-$")
+cor(Boston$chas, Boston$medv, method = "spearman")
 
 
 #für black-lstatus
@@ -70,4 +67,11 @@ plot(Boston$medv, Boston$zn, col = "blue", pch = 16, ylab = "Anzahl der Grundst�
 abline(lm(zn ~ medv, data = Boston), col = "red")
 coef(lm(zn ~ medv, data= Boston))
 cor(Boston$medv, Boston$zn)
+summary(Boston$zn)
 
+cor(Boston$nox, Boston$rad)
+coef(lm(dis ~ nox, data = Boston))
+coef(lm(nox ~ rad, data = Boston))
+
+#fpr dis-rad
+plot(Boston$)
